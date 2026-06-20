@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: #0f0f1a;
+        --surface: #1a1a2e;
+        --surface-light: #252542;
+        --primary: #8b7cf7;
+        --primary-dark: #6b5ce7;
+        --primary-light: #a89bf9;
+        --text-primary: #ffffff;
+        --text-secondary: #9ca3af;
+        --text-muted: #6b7280;
+        --border: #2d2d44;
+    }
+}
+
+@layer components {
+    .card {
+        @apply bg-surface rounded-2xl border border-border;
+    }
+
+    .input-field {
+        @apply bg-surface-light border border-border rounded-xl px-4 py-3 text-white placeholder-text-muted focus:border-primary focus:outline-none;
+    }
+
+    .btn-primary {
+        @apply bg-primary rounded-xl py-3 px-6 text-white font-medium active:scale-95 transition-transform;
+    }
+
+    .btn-secondary {
+        @apply bg-surface-light border border-border rounded-xl py-3 px-6 text-white font-medium active:scale-95 transition-transform;
+    }
+}
