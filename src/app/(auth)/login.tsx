@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  Alert,
 } from "react-native";
 import { router } from "expo-router";
 import { useForm, Controller } from "react-hook-form";
@@ -41,6 +42,7 @@ export default function LoginScreen() {
     try {
       setError("");
       await signIn(data);
+      // After successful login, go to tabs
       router.replace("/(tabs)");
     } catch (err: any) {
       setError(err.message || "Invalid email or password");
@@ -162,7 +164,7 @@ export default function LoginScreen() {
           <Pressable
             onPress={handleSubmit(onSubmit)}
             disabled={isLoading}
-            className="bg-primary rounded-xl py-4 mt-6 items-center active:scale-95 transition-transform"
+            className={`bg-primary rounded-xl py-4 mt-6 items-center active:scale-95 transition-transform ${isLoading ? "opacity-60" : ""}`}
           >
             <View className="flex-row items-center">
               <Text
@@ -211,21 +213,6 @@ export default function LoginScreen() {
               Create Account
             </Text>
           </Pressable>
-        </View>
-
-        <View className="flex-row justify-center mt-4 space-x-4">
-          <Text
-            className="text-text-muted text-xs"
-            style={{ fontFamily: "DMSans_400Regular" }}
-          >
-            Privacy Policy
-          </Text>
-          <Text
-            className="text-text-muted text-xs"
-            style={{ fontFamily: "DMSans_400Regular" }}
-          >
-            Terms of Service
-          </Text>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

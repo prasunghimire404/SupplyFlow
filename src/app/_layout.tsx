@@ -1,7 +1,6 @@
-import { useEffect } from "react";
-import { Platform, StatusBar as RNStatusBar } from "react-native";
+import { Platform, StatusBar as RNStatusBar, View } from "react-native";
 import { Stack } from "expo-router";
-import { StatusBar } from "expo-status-bar";
+import { StatusBar } from "expo-status-bar"; // <-- ADD THIS IMPORT
 import { STATUS_BAR_BACKGROUND } from "@/components/screen-top-bar";
 import {
   useFonts,
@@ -11,13 +10,12 @@ import {
 } from "@expo-google-fonts/dm-sans";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { View } from "react-native";
-import { useAuthStore } from "@/store/auth-store";
-import { authService } from "@/services/auth.service";
-import { configureReanimatedLogger, ReanimatedLogLevel } from "react-native-reanimated";
+import {
+  configureReanimatedLogger,
+  ReanimatedLogLevel,
+} from "react-native-reanimated";
 import "../global.css";
 
-// Disable strict mode to suppress rendering warnings (e.g. from third-party libraries like bottom-sheet)
 configureReanimatedLogger({
   strict: false,
   level: ReanimatedLogLevel.warn,
@@ -30,18 +28,16 @@ export default function RootLayout() {
     DMSans_700Bold,
   });
 
-  const { setUser, setLoading } = useAuthStore();
-
-  useEffect(() => {
-    const unsubscribe = authService.onAuthStateChanged((user) => {
-      setUser(user);
-      setLoading(false);
-    });
-    return unsubscribe;
-  }, []);
-
   if (!fontsLoaded) {
-    return null;
+    return (
+      <View className="flex-1 bg-background">
+        <RNStatusBar
+          barStyle="light-content"
+          backgroundColor={STATUS_BAR_BACKGROUND}
+          translucent={Platform.OS === "android"}
+        />
+      </View>
+    );
   }
 
   return (
@@ -58,7 +54,10 @@ export default function RootLayout() {
             <Stack.Screen name="index" options={{ headerShown: false }} />
             <Stack.Screen name="(auth)" options={{ headerShown: false }} />
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="notifications" options={{ headerShown: false }} />
+            <Stack.Screen
+              name="notifications"
+              options={{ headerShown: false }}
+            />
             <Stack.Screen name="settings" options={{ headerShown: false }} />
             <Stack.Screen name="profile" options={{ headerShown: false }} />
           </Stack>
