@@ -359,7 +359,7 @@ Make sure `expo-env.d.ts` exists at project root and `tsconfig.json` includes it
 
 ## 👤 Author
 
-**Your Name** — [GitHub](https://github.com/yourusername) · [Email](mailto:you@example.com)
+**Your Name** — [GitHub](https://github.com/prasunghimire404) · [Email](prasunghimire05@gmail.com)
 
 ---
 
